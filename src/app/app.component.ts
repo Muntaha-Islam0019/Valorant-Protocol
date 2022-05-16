@@ -1,3 +1,4 @@
+// The component class code, written in TypeScript
 import { Component } from '@angular/core';
 
 @Component({
