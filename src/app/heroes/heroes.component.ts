@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeroesComponent implements OnInit {
   // Always export the component class so you can import it elsewhere … like in the AppModule
+  hero = 'Brimstone';
 
   constructor() {}
 
