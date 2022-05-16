@@ -1,6 +1,6 @@
-# ValorantProtocol
+# Valorant Protocol
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
+Valorant Protocol shows basic descriptions of all members of the [Valorant Protocol](https://playvalorant.com/en-us/). This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
 
 ## Development server
 
