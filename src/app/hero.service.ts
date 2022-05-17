@@ -22,7 +22,7 @@ export class HeroService {
   // HttpClient.get<Hero[]>() which also returns an Observable<Hero[]> that emits a single value, an array of heroes from the body of the HTTP response
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
-    this.messageService.add('Fetched agents');
+    this.messageService.add('Fetched All Agents');
     return heroes;
   }
 }
