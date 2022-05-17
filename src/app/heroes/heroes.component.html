@@ -1,8 +1,19 @@
-<h2>{{ hero.name | uppercase }} Details:</h2>
+<!-- <h2>{{ hero.name | uppercase }} Details:</h2>
 <div><span>ID: </span>{{ hero.id }}</div>
-<div><span>Name: </span>{{ hero.name }}</div>
-<div>
+<div><span>Name: </span>{{ hero.name }}</div> -->
+<!-- [(ngModel)] is Angular's two-way data binding syntax -->
+<!-- <div>
   <label for="name">Hero Name: </label>
-  <!-- [(ngModel)] is Angular's two-way data binding syntax -->
   <input id="name" [(ngModel)]="hero.name" placeholder="Name" />
-</div>
+</div> -->
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <!-- The *ngFor is Angular's repeater directive -->
+  <!-- Don't forget the asterisk (*) character in front of ngFor -->
+  <li *ngFor="let hero of heroes">
+    <button type="button">
+      <span class="badge">{{ hero.id }}</span>
+      <span class="name">{{ hero.name }}</span>
+    </button>
+  </li>
+</ul>

@@ -1,6 +1,7 @@
 // Calling the members as heroes, as there are agents and radiants both, and obviously, they are heroes
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../hero';
+// import { Hero } from '../hero';
+import { HEROES } from '../mock-heroes';
 
 // @Component is a decorator function that specifies the Angular metadata for the component
 // The CSS element selector, 'app-heroes', matches the name of the HTML element that identifies this component within a parent component's template
@@ -11,10 +12,11 @@ import { Hero } from '../hero';
 })
 export class HeroesComponent implements OnInit {
   // Always export the component class so you can import it elsewhere … like in the AppModule
-  hero: Hero = {
-    id: 1,
-    name: 'Brimstone',
-  };
+  // hero: Hero = {
+  //   id: 1,
+  //   name: 'Brimstone',
+  // };
+  heroes = HEROES;
 
   constructor() {}
 
