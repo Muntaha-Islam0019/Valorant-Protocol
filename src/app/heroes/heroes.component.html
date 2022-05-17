@@ -6,14 +6,28 @@
   <label for="name">Hero Name: </label>
   <input id="name" [(ngModel)]="hero.name" placeholder="Name" />
 </div> -->
-<h2>My Heroes</h2>
+<h2>Valorant Agents:</h2>
 <ul class="heroes">
   <!-- The *ngFor is Angular's repeater directive -->
   <!-- Don't forget the asterisk (*) character in front of ngFor -->
   <li *ngFor="let hero of heroes">
-    <button type="button">
+    <!-- The parentheses around click tell Angular to listen for the <button> element's click event -->
+    <button
+      type="button"
+      (click)="onSelect(hero)"
+      [class.selected]="hero === selectedHero"
+    >
       <span class="badge">{{ hero.id }}</span>
       <span class="name">{{ hero.name }}</span>
     </button>
   </li>
 </ul>
+<!-- Don't forget the asterisk (*) character in front of ngIf -->
+<div *ngIf="selectedHero">
+  <h2>{{ selectedHero.name | uppercase }} Details:</h2>
+  <div>ID: {{ selectedHero.id }}</div>
+  <div>
+    <label for="hero-name">Agent Name: </label>
+    <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name" />
+  </div>
+</div>

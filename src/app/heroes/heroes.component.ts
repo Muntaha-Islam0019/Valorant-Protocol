@@ -1,6 +1,6 @@
 // Calling the members as heroes, as there are agents and radiants both, and obviously, they are heroes
 import { Component, OnInit } from '@angular/core';
-// import { Hero } from '../hero';
+import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
 
 // @Component is a decorator function that specifies the Angular metadata for the component
@@ -17,6 +17,7 @@ export class HeroesComponent implements OnInit {
   //   name: 'Brimstone',
   // };
   heroes = HEROES;
+  selectedHero?: Hero;
 
   constructor() {}
 
@@ -24,4 +25,8 @@ export class HeroesComponent implements OnInit {
   // Angular calls ngOnInit() shortly after creating a component
   // It's a good place to put initialization logic
   ngOnInit(): void {}
+
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
 }
