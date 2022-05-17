@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Hero } from './hero';
 import { HEROES } from './mock-heroes';
 import { Observable, of } from 'rxjs';
+import { MessageService } from './message.service';
 
 // This marks the class as one that participates in the dependency injection system
 // The @Injectable() decorator accepts a metadata object for the service
@@ -13,11 +14,15 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class HeroService {
-  constructor() {}
+  // Angular will inject the singleton MessageService into that property when it creates the HeroService
+  // This is a typical "service-in-service" scenario
+  // You inject the MessageService into the HeroService which is injected into the HeroesComponent
+  constructor(private messageService: MessageService) {}
 
   // HttpClient.get<Hero[]>() which also returns an Observable<Hero[]> that emits a single value, an array of heroes from the body of the HTTP response
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
+    this.messageService.add('Fetched agents');
     return heroes;
   }
 }
