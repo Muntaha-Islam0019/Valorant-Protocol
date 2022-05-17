@@ -36,6 +36,13 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    // You're getting away with it now because the service currently returns mock heroes
+    // The HeroService must wait for the server to respond, getHeroes() cannot return immediately with hero data, and the browser will not block while the service waits
+    // HeroService.getHeroes() must have an asynchronous signature of some kind
+    // this.heroes = this.heroService.getHeroes();
+
+    // Waits for the Observable to emit the array of heroes —which could happen now or several minutes from now
+    // The subscribe() method passes the emitted array to the callback, which sets the component's heroes property
+    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
 }
