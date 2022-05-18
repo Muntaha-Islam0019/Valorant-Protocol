@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HeroesComponent } from './heroes/heroes.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-const routes: Routes = [{ path: 'heroes', component: HeroesComponent }];
+const routes: Routes = [
+  // To make the application navigate to the dashboard automatically
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'heroes', component: HeroesComponent },
+  { path: 'dashboard', component: DashboardComponent },
+];
 
 // The @NgModule metadata initializes the router and starts it listening for browser location changes
 @NgModule({
