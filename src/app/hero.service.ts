@@ -98,4 +98,12 @@ export class HeroService {
       catchError(this.handleError<any>('updateHero'))
     );
   }
+
+  /** POST: add a new hero to the server */
+  addHero(hero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
+      tap((newHero: Hero) => this.log(`Added Agent with ID=${newHero.id}`)),
+      catchError(this.handleError<Hero>('addHero'))
+    );
+  }
 }
