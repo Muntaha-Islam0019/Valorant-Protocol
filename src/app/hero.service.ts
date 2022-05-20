@@ -17,6 +17,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class HeroService {
   private heroesUrl = 'api/heroes'; // URL to web api
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
 
   // Angular will inject the singleton MessageService into that property when it creates the HeroService
   // This is a typical "service-in-service" scenario
@@ -82,5 +85,17 @@ export class HeroService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  /** PUT: update the hero on the server */
+  // The HttpClient.put() method takes three parameters:
+  // The URL
+  // The data to update (the modified hero in this case)
+  // Options
+  updateHero(hero: Hero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+      tap((_) => this.log(`Updated Agent ID=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
   }
 }
