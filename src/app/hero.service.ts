@@ -29,7 +29,7 @@ export class HeroService {
   // HttpClient.get<Hero[]>() which also returns an Observable<Hero[]> that emits a single value, an array of heroes from the body of the HTTP response
   getHeroes(): Observable<Hero[]> {
     // const heroes = of(HEROES);
-    this.messageService.add('Fetched All Agents');
+    // this.messageService.add('Fetched All Agents');
     // return heroes;
     /** GET heroes from the server */
     // All HttpClient methods return an RxJS Observable of something
@@ -37,17 +37,25 @@ export class HeroService {
     // The HeroService methods will tap into the flow of observable values and send a message, using the log() method, to the message area at the bottom of the page
     // They'll do that with the RxJS tap() operator, which looks at the observable values, does something with those values, and passes them along
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
-      tap((_) => this.log('fetched heroes')),
+      tap((_) => this.log('Fetched Agents')),
       catchError(this.handleError<Hero[]>('getHeroes', []))
     );
   }
 
+  // getHero(id: number): Observable<Hero> {
+  //   // For now, assume that a hero with the specified `id` always exists
+  //   // Error handling will be added in the next step of the tutorial
+  //   const hero = HEROES.find((h) => h.id === id)!;
+  //   this.messageService.add(`Fetched Agent ID=${id}`);
+  //   return of(hero);
+
+  // }/** GET hero by id. Will 404 if id not found */
   getHero(id: number): Observable<Hero> {
-    // For now, assume that a hero with the specified `id` always exists
-    // Error handling will be added in the next step of the tutorial
-    const hero = HEROES.find((h) => h.id === id)!;
-    this.messageService.add(`Fetched Agent ID=${id}`);
-    return of(hero);
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get<Hero>(url).pipe(
+      tap((_) => this.log(`Fetched Agent ID=${id}`)),
+      catchError(this.handleError<Hero>(`getHero id=${id}`))
+    );
   }
 
   /** Log a HeroService message with the MessageService */
