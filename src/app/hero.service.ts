@@ -7,6 +7,7 @@ import { HEROES } from './mock-heroes';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 
 // This marks the class as one that participates in the dependency injection system
 // The @Injectable() decorator accepts a metadata object for the service
@@ -31,7 +32,11 @@ export class HeroService {
     this.messageService.add('Fetched All Agents');
     // return heroes;
     /** GET heroes from the server */
-    return this.http.get<Hero[]>(this.heroesUrl)
+    // All HttpClient methods return an RxJS Observable of something
+    // To catch errors, you "pipe" the observable result from http.get() through an RxJS catchError() operator
+    return this.http
+      .get<Hero[]>(this.heroesUrl)
+      .pipe(catchError(this.handleError<Hero[]>('getHeroes', [])));
   }
 
   getHero(id: number): Observable<Hero> {
@@ -45,5 +50,26 @@ export class HeroService {
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
     this.messageService.add(message);
+  }
+
+  /**
+   * Handle Http operation that failed
+   * Let the app continue
+   *
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  // Because each service method returns a different kind of Observable result, handleError() takes a type parameter so it can return the safe value as the type that the application expects
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
